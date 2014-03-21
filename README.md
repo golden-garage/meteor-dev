@@ -3,7 +3,7 @@ meteor-dev
 
 A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/) 
 for building a [Meteor](http://www.meteor.com) container
-tha can be used for development.
+that can be used for development.
 
 
 Intro
@@ -16,13 +16,16 @@ installing and maintaining a collection of virtual servers (on my desktop or in 
 
 This is a first attempt at creating a `docker` container that can be used for Meteor development.
 
+It works well on Linux, but requires a bit of hacking elsewhere. 
 
-Usage
------
+I am currently using Ubuntu in VirtualBox on a MacBook.
+
+
+Usage *on Linux*
+----------------
 
 First, [install docker](https://www.docker.io/gettingstarted/#h_installation). 
-For a [Mac OS X install](http://docs.docker.io/en/latest/installation/mac/)
-use [boot2docker](https://github.com/boot2docker/boot2docker).
+
 
 Then, build your own Meteor container directly from this repo. It will be tagged locally as `meteor-dev`.
 
@@ -43,3 +46,9 @@ Hit `^C` in the window where the `meteor-dev` container is running, and the cont
 
 Each time you use `docker run` to start Meteor, you are starting from a fresh install of Meteor. If you are using
 smart-packages, they will automatically be installed when Meteor is started.
+
+
+Not sure (yet) about usage *on Mac OS X* (or *Windows*)
+-------------------------------------------------------
+
+[Workarounds are required.](https://github.com/boot2docker/boot2docker/blob/master/doc/WORKAROUNDS.md)
