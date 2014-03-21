@@ -3,7 +3,7 @@ meteor-dev
 
 A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/) 
 for building a [Meteor](http://www.meteor.com) container
-that can be used for development.
+that can be used during development.
 
 
 Intro
