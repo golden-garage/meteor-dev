@@ -24,19 +24,19 @@ I am currently using it on Ubuntu in a VirtualBox running on a MacBook.
 Prerequisite
 ------------
 
-- A modern 64-bit 3.8+ Linux Kernel that supports [LXC](https://linuxcontainers.org/) ([Ubuntu Saucy](http://releases.ubuntu.com/13.10/)
+- A modern 64-bit 3.8+ Linux Kernel that supports [LXC](https://linuxcontainers.org/) ([Ubuntu Saucy](http://releases.ubuntu.com/13.10/))
  
 
-Quickstart
-----------
+Usage 
+-----
 
     docker build --tag="meteor-dev" git://github.com/golden-garage/meteor-dev
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
 
 
-Use (*on Linux*)
----
+Details
+-------
 
 First, [install docker](https://www.docker.io/gettingstarted/#h_installation). 
 
@@ -91,4 +91,5 @@ References
 
 - [Docker](http://docker.io)
 - [Meteor](http://meteor.com)
+- [LXC - Linux Containers](https://linuxcontainers.org/)
 - [What does Docker add to just plain lxc?](http://stackoverflow.com/questions/17989306/what-does-docker-add-to-just-plain-lxc)
