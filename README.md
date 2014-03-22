@@ -36,9 +36,11 @@ Run Meteor using a trusted prebuilt image
 pre-built image from the [docker.io][(http://docker.io) 
 [shared repository](https://index.docker.io/).
 
+
     docker pull golden/meteor-dev
 
 - run Meteor using the source code in the `/path/to/meteor/app` directory
+
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application golden/meteor-dev
 
@@ -52,9 +54,11 @@ Roll your own image
 
 - build your own image from this git repo
 
+
     docker build --tag="meteor-dev" git://github.com/golden-garage/meteor-dev
     
 - run Meteor using the image you built
+
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
 
