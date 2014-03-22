@@ -16,27 +16,51 @@ installing and maintaining a collection of servers or VMs (on my desktop or in t
 
 This is a first attempt at creating a `docker` container that can be used for Meteor development.
 
-It works well on Linux, but requires a bit of hacking elsewhere. 
+It works really well on Linux, but requires a bit of hacking elsewhere. 
 
-I am currently using it on Ubuntu in a VirtualBox running on a MacBook.
+I am currently using this container on a daily basis from my [Lubuntu](http://lubuntu.net/) devbox (which runs in a VirtualBox VM on my MacBook).
 
 
-Prerequisite
-------------
+Prerequisites
+-------------
 
-- A modern 64-bit 3.8+ Linux Kernel that supports [LXC](https://linuxcontainers.org/) ([Ubuntu Saucy](http://releases.ubuntu.com/13.10/))
+- A modern 64-bit 3.8+ Linux Kernel that supports [LXC](https://linuxcontainers.org/) (such as [Ubuntu Saucy](http://releases.ubuntu.com/13.10/))
  
 
-Usage 
------
+Run Meteor using a trusted prebuilt image
+-----------------------------------------
+
+- [install docker](https://www.docker.io/gettingstarted/#h_installation)
+
+- download a [trusted](http://docs.docker.io/en/latest/use/workingwithrepository/#trusted-builds) 
+pre-built image from the [docker.io][(http://docker.io) 
+[shared repository](https://index.docker.io/).
+
+    docker pull golden/meteor-dev
+
+- run Meteor using the source code in the `/path/to/meteor/app` directory
+
+    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application golden/meteor-dev
+
+- The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
+
+
+Roll your own image
+-------------------
+
+- [install docker](https://www.docker.io/gettingstarted/#h_installation)
+
+- build your own image from this git repo
 
     docker build --tag="meteor-dev" git://github.com/golden-garage/meteor-dev
+    
+- run Meteor using the image you built
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
 
 
-Details
--------
+Detailed walkthrough
+--------------------
 
 First, [install docker](https://www.docker.io/gettingstarted/#h_installation). 
 
@@ -56,10 +80,18 @@ You can view the running Meteor application in a web browser at `http://127.0.0.
 
 The `docker run` command runs interactively (`-t -i`) so that you can see the output of Meteor as it is running.
 
+Your application's source code is mounted (`-v`) in the container at `/opt/application`. The Meteor server is started in this directory.
+
 Now, when you change the source code of your Meteor app (located in the local directory `/path/to/meteor/app/`), 
-the instance of Meteor running in the `meteor-dev` container will update the app.
+the instance of Meteor running in the `meteor-dev` container will automatically update the running application and you will see the changes immediately in the browser, just as if Meteor was running locally.
 
 Hit `^C` in the window where the `meteor-dev` container is running, and the container will be stopped.
+
+Hit `^P ^Q` in the same window, and the container will be released but not stopped. You can see the container is still running by using the `docker ps` command.
+
+The running container can be used to create a new docker image.
+
+    docker commit --run='{"WorkingDir":"/opt/application","Cmd":["meteor"]}' container-id
 
 
 Each time you use `docker run` to start Meteor, you are creating a new container with a fresh install of Meteor. 
@@ -93,3 +125,4 @@ References
 - [Meteor](http://meteor.com)
 - [LXC - Linux Containers](https://linuxcontainers.org/)
 - [What does Docker add to just plain lxc?](http://stackoverflow.com/questions/17989306/what-does-docker-add-to-just-plain-lxc)
+- [Trusted Builds](http://docs.docker.io/en/latest/use/workingwithrepository/#trusted-builds)
