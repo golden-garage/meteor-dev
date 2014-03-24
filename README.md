@@ -30,51 +30,51 @@ Prerequisites
 Run Meteor using a trusted prebuilt image
 -----------------------------------------
 
-- [install docker](https://www.docker.io/gettingstarted/#h_installation)
+[install `docker`](https://www.docker.io/gettingstarted/#h_installation)
 
-- download a [trusted](http://docs.docker.io/en/latest/use/workingwithrepository/#trusted-builds) 
-pre-built image from the [docker.io][(http://docker.io) 
+download the [trusted](http://docs.docker.io/en/latest/use/workingwithrepository/#trusted-builds) 
+`golden/meteor-dev` pre-built image from the [docker.io][(http://docker.io) 
 [shared repository](https://index.docker.io/).
-
 
     docker pull golden/meteor-dev
 
-- run Meteor using the source code in the `/path/to/meteor/app` directory
 
+run Meteor using the source code in the `/path/to/meteor/app` directory
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application golden/meteor-dev
 
-- The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
+
+The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
 
 
 Roll your own image
 -------------------
 
-- [install docker](https://www.docker.io/gettingstarted/#h_installation)
+[install docker](https://www.docker.io/gettingstarted/#h_installation)
 
-- build your own image from this git repo
-
+build your own image (`meteor-dev`) from this github repo
 
     docker build --tag="meteor-dev" git://github.com/golden-garage/meteor-dev
     
-- run Meteor using the image you built
 
+run Meteor using the image you built (`meteor-dev`)
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
+
 
 
 Detailed walkthrough
 --------------------
 
-First, [install docker](https://www.docker.io/gettingstarted/#h_installation). 
+First, [install `docker`](https://www.docker.io/gettingstarted/#h_installation). 
 
 
-Then, build your own Meteor container directly from this repo. It will be tagged locally as `meteor-dev`.
+Then, build your own Meteor container directly from this github repo. It will be tagged locally as `meteor-dev`.
 
     docker build --tag="meteor-dev" git://github.com/golden-garage/meteor-dev
 
 
-Finally, run the container attached to a local directory (e.g. `/path/to/meteor/app`).
+Finally, run the container attached to a local Meteor source code directory (e.g. `/path/to/meteor/app`).
 
     docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
 
@@ -84,27 +84,32 @@ You can view the running Meteor application in a web browser at `http://127.0.0.
 
 The `docker run` command runs interactively (`-t -i`) so that you can see the output of Meteor as it is running.
 
-Your application's source code is mounted (`-v`) in the container at `/opt/application`. The Meteor server is started in this directory.
+Your application's source code is mounted (`-v`) in the docker container at `/opt/application`. The Meteor server is started in this directory.
 
-Now, when you change the source code of your Meteor app (located in the local directory `/path/to/meteor/app/`), 
-the instance of Meteor running in the `meteor-dev` container will automatically update the running application and you will see the changes immediately in the browser, just as if Meteor was running locally.
+If you are using `meteorite` installed smart-packages, they will be automatically be installed when Meteor is started.
 
-Hit `^C` in the window where the `meteor-dev` container is running, and the container will be stopped.
 
-Hit `^P ^Q` in the same window, and the container will be released but not stopped. You can see the container is still running by using the `docker ps` command.
+Using the `meteor-dev` container
+--------------------------------
+
+When you make changes to the source code of your Meteor app (located in the local directory `/path/to/meteor/app/`), 
+the instance of Meteor running in the `meteor-dev` container will automatically update the running application and you will see the changes immediately in the browser, just as if Meteor was running on your desktop machine.
+
+Press `^C` in the window where the `meteor-dev` container is running, and the container will be stopped.
+
+If you instead press `^P ^Q` in the contianer window, the container will be released but not stopped. You can see the container is still running by using the `docker ps` command.
 
 The running container can be used to create a new docker image.
 
     docker commit --run='{"WorkingDir":"/opt/application","Cmd":["meteor"]}' container-id
 
 
-Each time you use `docker run` to start Meteor, you are creating a new container with a fresh install of Meteor. 
-
-If you are using `meteorite` installed smart-packages, they will be automatically be installed when Meteor is started.
 
 
 Cleanup
 -------
+
+Each time you use `docker run` to start Meteor, you are creating a new container with a fresh install of Meteor. 
 
 You can clean up stopped containers by using `docker rm`.
 
