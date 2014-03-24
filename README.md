@@ -33,7 +33,7 @@ Run Meteor using a trusted prebuilt image
 [install `docker`](https://www.docker.io/gettingstarted/#h_installation)
 
 download the [trusted](http://docs.docker.io/en/latest/use/workingwithrepository/#trusted-builds) 
-`golden/meteor-dev` pre-built image from the [docker.io][(http://docker.io) 
+`golden/meteor-dev` pre-built image from the [docker.io](http://docker.io) 
 [shared repository](https://index.docker.io/).
 
     docker pull golden/meteor-dev
