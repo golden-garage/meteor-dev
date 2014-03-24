@@ -27,13 +27,13 @@ Prerequisites
 - A modern 64-bit 3.8+ Linux Kernel that supports [LXC](https://linuxcontainers.org/) (such as [Ubuntu Saucy](http://releases.ubuntu.com/13.10/))
  
 
-Run Meteor using a trusted prebuilt image
------------------------------------------
+Run Meteor using a trusted prebuilt docker container
+----------------------------------------------------
 
 [install `docker`](https://www.docker.io/gettingstarted/#h_installation)
 
 download the [trusted](http://docs.docker.io/en/latest/use/workingwithrepository/#trusted-builds) 
-`golden/meteor-dev` pre-built image from the [docker.io](http://docker.io) 
+`golden/meteor-dev` pre-built container from the [docker.io](http://docker.io) 
 [shared repository](https://index.docker.io/).
 
     docker pull golden/meteor-dev
