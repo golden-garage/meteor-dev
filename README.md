@@ -6,27 +6,6 @@ for building a [Meteor](http://www.meteor.com) container
 that can be used during development.
 
 
-Intro
------
-
-I've been playing with light-weight containers from [Docker.io](http://docker.io). 
-
-For development, I really like the concept of using "lightweight, portable, self-sufficient containers" instead of
-installing and maintaining a collection of servers or VMs (on my desktop or in the cloud).
-
-This is a first attempt at creating a `docker` container that can be used for Meteor development.
-
-It works really well on Linux, but requires a bit of hacking elsewhere. 
-
-I am currently using this container on a daily basis from my [Lubuntu](http://lubuntu.net/) devbox (which runs in a VirtualBox VM on my MacBook).
-
-
-Prerequisites
--------------
-
-- A modern 64-bit 3.8+ Linux Kernel that supports [LXC](https://linuxcontainers.org/) (such as [Ubuntu Saucy](http://releases.ubuntu.com/13.10/))
- 
-
 Run Meteor using a trusted prebuilt docker container
 ----------------------------------------------------
 
@@ -46,6 +25,8 @@ run Meteor using the source code in the `/path/to/meteor/app` directory
 
 The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
 
+The app directory (`/opt/application`) could be located anywhere in the image.
+
 
 Roll your own image
 -------------------
@@ -59,7 +40,7 @@ build your own image (`meteor-dev`) from this github repo
 
 run Meteor using the image you built (`meteor-dev`)
 
-    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
+    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
 
 
 
@@ -76,7 +57,7 @@ Then, build your own Meteor container directly from this github repo. It will be
 
 Finally, run the container attached to a local Meteor source code directory (e.g. `/path/to/meteor/app`).
 
-    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application meteor-dev
+    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
 
 
 You can view the running Meteor application in a web browser at `http://127.0.0.1:3000`.
@@ -84,7 +65,7 @@ You can view the running Meteor application in a web browser at `http://127.0.0.
 
 The `docker run` command runs interactively (`-t -i`) so that you can see the output of Meteor as it is running.
 
-Your application's source code is mounted (`-v`) in the docker container at `/opt/application`. The Meteor server is started in this directory.
+Your application's source code is mounted (`-v`) in the docker container at `/opt/application`. The Meteor server is started in this directory (`-w /opt/application`). It is not necessary to mount the application at `/opt/application`, you can define your own mountpoint in the docker image.
 
 If you are using `meteorite` installed smart-packages, they will be automatically be installed when Meteor is started.
 
