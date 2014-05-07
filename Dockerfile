@@ -25,4 +25,4 @@ RUN npm install -g meteorite
 EXPOSE 3000
 
 
-CMD cd /opt/application; mrt install && meteor
+CMD mrt install && meteor
