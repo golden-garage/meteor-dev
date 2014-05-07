@@ -41,7 +41,7 @@ download the [trusted](http://docs.docker.io/en/latest/use/workingwithrepository
 
 run Meteor using the source code in the `/path/to/meteor/app` directory
 
-    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application golden/meteor-dev
+    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application -w /opt/application golden/meteor-dev
 
 
 The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
