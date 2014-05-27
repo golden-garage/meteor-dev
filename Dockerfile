@@ -24,11 +24,7 @@ RUN npm install -g meteorite
 WORKDIR /opt/application
 
 
-RUN mrt install
-RUN meteor update
-
-
 EXPOSE 3000
 
 
-CMD meteor
+CMD [ "bash", "-c", "mrt install; meteor run" ]
