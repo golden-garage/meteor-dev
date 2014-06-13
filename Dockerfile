@@ -5,7 +5,7 @@ MAINTAINER Rick Golden "golden@golden-garage.net"
 
 RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX
 
-
+RUN apt-get update
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:chris-lea/node.js
 
