@@ -7,6 +7,7 @@ that can be used during development.
 
 Updated Meteor to version 0.8.2.
 
+
 Run Meteor using a trusted prebuilt docker container
 ----------------------------------------------------
 
