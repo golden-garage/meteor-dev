@@ -5,7 +5,7 @@ A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/)
 for building a [Meteor](http://www.meteor.com) container
 that can be used during development.
 
-Updated Meteor to version 0.8.3.
+Updated Meteor to version 0.9.0.
 
 
 Run Meteor using a trusted prebuilt docker container
@@ -22,7 +22,7 @@ download the [trusted](http://docs.docker.io/en/latest/use/workingwithrepository
 
 run Meteor using the source code in the `/path/to/meteor/app` directory
 
-    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application -w /opt/application golden/meteor-dev
+    docker run -it -p 3000:3000 -v /path/to/meteor/app:/opt/application -w /opt/application golden/meteor-dev
 
 
 The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
@@ -42,7 +42,7 @@ build your own image (`meteor-dev`) from this github repo
 
 run Meteor using the image you built (`meteor-dev`)
 
-    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
+    docker run -it -p 3000:3000 -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
 
 
 
@@ -59,7 +59,7 @@ Then, build your own Meteor container directly from this github repo. It will be
 
 Finally, run the container attached to a local Meteor source code directory (e.g. `/path/to/meteor/app`).
 
-    docker run -p 3000:3000 -t -i -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
+    docker run -it -p 3000:3000 -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
 
 
 You can view the running Meteor application in a web browser at `http://127.0.0.1:3000`.
