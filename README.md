@@ -5,7 +5,7 @@ A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/)
 for building a [Meteor](http://www.meteor.com) container
 that can be used during development.
 
-Updated Meteor to version 0.9.0.
+Updated Meteor to version 0.9.0.1.
 
 
 Run Meteor using a trusted prebuilt docker container
