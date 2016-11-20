@@ -1,14 +1,17 @@
-FROM ubuntu:14.04
+FROM ubuntu:latest
 
 MAINTAINER Rick Golden "golden@golden-garage.net"
 
+RUN DEBIAN_FRONTEND=noninteractive apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl
 
-RUN update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX
+RUN localedef en_US.UTF-8 -i en_US -fUTF-8
 
-RUN apt-get update
-RUN apt-get -y dist-upgrade
-RUN apt-get install -y curl
+RUN useradd -mUd /home/meteor meteor
+RUN chown -Rh meteor /usr/local
 
+USER meteor
 
 RUN curl https://install.meteor.com/ | sh
 
@@ -19,4 +22,4 @@ WORKDIR /opt/application
 EXPOSE 3000
 
 
-CMD [ "meteor" ]
+ENTRYPOINT [ "/usr/local/bin/meteor" ]
