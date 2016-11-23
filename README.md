@@ -1,73 +1,71 @@
 meteor-dev
 ==========
 
-A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/) 
-for building a [Meteor](http://www.meteor.com) container
-that can be used during development.
+A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/) for building a [Meteor](http://www.meteor.com)
+development container.
 
-Updated Meteor to version 1.4.2.3.
+Updated to **Meteor version 1.4.2.3.**
 
-I use the following bash alias to run meteor form the command-line during development:
 
-    alias mm='docker run -it --rm -v $PWD:/opt/application -p 3000:3000 golden/meteor-dev'
-   
+Use the following bash alias to run meteor from the command-line:
+
+    alias mm='docker run -it --rm --name=meteor -v $PWD:/opt/application -p 3000:3000 golden/meteor-dev'
+
+
+Here's an example of the alias in use:
+
     mm create new-meteor-app
     cd new-meteor-app
     mm npm install
     mm
-    
-The meteor server will attempt to restart when interrupted usng `ctrl-C`, so use `docker stop` to shutdown the server.
 
 
-Run Meteor using a trusted prebuilt docker container
-----------------------------------------------------
+When interrupted using `ctrl-C`, meteor will restart, so use the `docker stop` command to shutdown the server.
 
-[install `docker`](https://www.docker.io/gettingstarted/#h_installation)
 
-download the `golden/meteor-dev` pre-built container from [Docker Hub](http://hub.docker.com). 
+
+Run Meteor using a prebuilt docker container
+--------------------------------------------
+
+Download the `golden/meteor-dev` pre-built container from [Docker Hub](http://hub.docker.com).
 
     docker pull golden/meteor-dev
 
 
-run Meteor using the source code in the `/path/to/meteor/app` directory
+Run meteor using the application source code in the `/path/to/meteor/app` directory.
 
     docker run -it --rm -p 3000:3000 -v /path/to/meteor/app:/opt/application golden/meteor-dev
 
 
-The Meteor application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
+The application is now accessible on port 3000 of the localhost (`http://localhost:3000`).
 
-
-**Note:** The app directory (`/opt/application`) could be located anywhere in the image. Use docker's working directory
-option (`-w`) to change the location of the app directory (e.g., `-w /another/location`).
 
 
 Roll your own image
 -------------------
 
-[install docker](https://www.docker.io/gettingstarted/#h_installation)
-
-build your own image (`meteor-dev`) from this github repo
+Build your own image (`meteor-dev`) from the github repo.
 
     docker build --tag="meteor-dev" git://github.com/golden-garage/meteor-dev
     
 
-run Meteor using the image you built (`meteor-dev`)
+Run meteor using the newly built image (`meteor-dev`).
 
     docker run -it --rm -p 3000:3000 -v /path/to/meteor/app:/opt/application -w /opt/application meteor-dev
+
 
 
 Using the `meteor-dev` container
 --------------------------------
 
-When you make changes to the source code of your Meteor app (located in the local directory `/path/to/meteor/app/`),
-the instance of Meteor running in the `meteor-dev` container will automatically update the running application and you
-will see the changes immediately in the browser, just as if Meteor was installed on your desktop machine.
+When changes are made to the source code of the meteor application in the local directory (`/path/to/meteor/app/`), the
+`meteor-dev` container automatically updates the running application. The application changes are seen immediately in
+the browser, just as if meteor were installed locally.
 
-You can also check on the status of the meteor container by using the `docker ps` command.
+You can check on the status of the meteor container by using the `docker ps` command.
 
-The meteor server will attempt to restart when interrupted usng `ctrl-C`. 
+The meteor server will attempt to restart when interrupted usng `ctrl-C`, so use `docker stop` to shutdown the server.
 
-Use `docker stop` to shutdown the server.
 
 
 Cleanup
@@ -76,9 +74,10 @@ Cleanup
 The meteor image is stateless and can be automatically removed when stopped by using the `--rm` docker command switch.
 
 Each time you use `docker run` to start Meteor without the `--rm` switch, a new container with a fresh install of
-Meteor is created. Each of these containers consumes disk space.
+meteor is created. Each of these containers consumes disk space.
 
-You can clean up stopped containers by using `docker rm`.
+You can clean up stopped containers by using the `docker rm` command.
+
 
 
 References
