@@ -4,10 +4,19 @@ meteor-dev
 A [Dockerfile](http://docs.docker.io/en/latest/reference/builder/) for building a [Meteor](http://www.meteor.com)
 development container.
 
+
+Revisions 
+---------
+
 Updated to **Meteor version 1.4.2.3.**
 
+Added `python` and `build-essential` packages, in case `npm` needs them to rebuild node modules.
 
-Use the following bash alias to run meteor from the command-line:
+
+TL;DR
+-----
+
+Use the following bash alias to run meteor from the command-line using the current direcotry as the application source:
 
     alias mm='docker run -it --rm --name=meteor -v $PWD:/opt/application -p 3000:3000 golden/meteor-dev'
 
@@ -20,7 +29,8 @@ Here's an example of the alias in use:
     mm
 
 
-When interrupted using `ctrl-C`, meteor will restart, so use the `docker stop` command to shutdown the server.
+**Note:** When interrupted using `ctrl-C`, meteor will restart, so use the `docker stop` command to shutdown the
+server.
 
 
 

@@ -4,7 +4,9 @@ MAINTAINER Rick Golden "golden@golden-garage.net"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl python build-essential
+RUN DEBIAN_FRONTEND=noninteractive apt-get autoremove
+RUN DEBIAN_FRONTEND=noninteractive apt-get clean
 
 RUN localedef en_US.UTF-8 -i en_US -fUTF-8
 
