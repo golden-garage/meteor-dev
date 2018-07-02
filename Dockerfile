@@ -21,11 +21,16 @@ VOLUME $APP_ROOT
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y curl python build-essential ${APP_PACKAGES}
+
+# install and set the locale (required by Meteor)
+RUN apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i ${APP_LOCALE} -c -f ${APP_CHARSET} -A /usr/share/locale/locale.alias ${APP_LOCALE}.${APP_CHARSET}
+ENV LANG ${APP_LOCALE}.${APP_CHARSET}
+
+# Clean apt
 RUN DEBIAN_FRONTEND=noninteractive apt-get autoremove
 RUN DEBIAN_FRONTEND=noninteractive apt-get clean
 
-# set the locale (required by Meteor)
-RUN localedef ${APP_LOCALE}.${APP_CHARSET} -i ${APP_LOCALE} -f ${APP_CHARSET}
 
 # create a non-root user that can write to /usr/local (required by Meteor)
 RUN useradd -mUd ${APP_USER_DIR} ${APP_USER}
